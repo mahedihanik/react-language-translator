@@ -1,17 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import "./style.css";
+import React, { useState } from "react";
+import Field from "./components/field";
+import Languages from "./components/languages";
+import Translate from "./components/translate";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+export default function App() {
+    const [language, setLanguage] = useState("ru");
+    const [text, setText] = useState("");
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+    return (
+        <div>
+            <Field label="Enter English" onChange={setText} value={text} />
+            <Languages language={language} onLanguageChange={setLanguage} />
+            <hr />
+            <Translate text={text} language={language} />
+        </div>
+    );
+}
+
